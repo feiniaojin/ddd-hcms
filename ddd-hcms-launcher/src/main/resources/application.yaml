@@ -5,9 +5,9 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://localhost:3306/hcms
-    username: hcms
-    password: ddd-hcms
+    url: jdbc:mysql://${MYSQL_IP:localhost}:${MYSQL_PORT:3306}/hcms
+    username: ${MYSQL_USERNAME:hcms}
+    password: ${MYSQL_PASSWORD:ddd-hcms}
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
