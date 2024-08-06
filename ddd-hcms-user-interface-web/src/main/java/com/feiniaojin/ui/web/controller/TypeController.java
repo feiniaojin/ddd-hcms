@@ -8,6 +8,8 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/content-types")
 public class TypeController {
@@ -19,15 +21,15 @@ public class TypeController {
     private TypeQueryService queryService;
 
     @ResponseBody
-    @PostMapping
-    public void create(@RequestBody TypeCreateCommand createCommand) {
+    @PutMapping("/create")
+    public void addNewType(@RequestBody TypeCreateCommand createCommand) {
         commandService.createTypeDraft(createCommand);
     }
 
-    @GetMapping
+    @PostMapping("/list")
     @ResponseBody
-    public TypeView pageList(@PathVariable String id) {
-        return queryService.findOne(id);
+    public List<TypeView> pageList() {
+        return queryService.findList();
     }
 
     @GetMapping("/{id}")

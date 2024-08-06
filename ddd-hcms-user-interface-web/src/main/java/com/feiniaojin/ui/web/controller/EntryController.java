@@ -19,13 +19,13 @@ public class EntryController {
     @Resource
     private EntryQueryService queryService;
 
-    @PutMapping
+    @PutMapping("/createEntry")
     @ResponseBody
     public void addNewEntry(@RequestBody EntryCreateCommand command) {
         commandService.createEntry(command);
     }
 
-    @PostMapping
+    @PostMapping("/page")
     @ResponseBody
     public Page<EntryView> pageList() {
         return queryService.pageList();

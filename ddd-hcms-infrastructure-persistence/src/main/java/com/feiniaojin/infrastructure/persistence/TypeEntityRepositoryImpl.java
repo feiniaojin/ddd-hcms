@@ -9,6 +9,9 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class TypeEntityRepositoryImpl implements TypeEntityRepository {
 
@@ -53,5 +56,28 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
         data.setContentTypeId(entity.getTypeId().getValue());
 
         jdbcRepository.save(data);
+    }
+
+    @Override
+    public List<TypeEntity> loadList() {
+        List<HcmsContentType> hcmsContentTypeList = jdbcRepository.findAllList();
+        return translates(hcmsContentTypeList);
+    }
+
+    private List<TypeEntity> translates(List<HcmsContentType> hcmsContentTypeList) {
+        List<TypeEntity> typeEntityList = new ArrayList<>();
+        for (HcmsContentType hcmsContentType:hcmsContentTypeList) {
+            TypeEntity typeEntity = new TypeEntity();
+            typeEntity.setTypeId(new TypeId(String.valueOf(hcmsContentType.getId())));
+            typeEntity.setDisplayName(hcmsContentType.getDisplayName());
+            typeEntity.setStatus(hcmsContentType.getStatus());
+
+            //version id
+            typeEntity.setId(hcmsContentType.getId());
+            typeEntity.setVersion(hcmsContentType.getVersion());
+            typeEntity.setDeleted(hcmsContentType.getDeleted());
+            typeEntityList.add(typeEntity);
+        }
+        return typeEntityList;
     }
 }

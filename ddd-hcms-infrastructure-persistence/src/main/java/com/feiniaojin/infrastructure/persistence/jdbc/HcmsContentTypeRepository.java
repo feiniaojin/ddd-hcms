@@ -4,6 +4,8 @@ import com.feiniaojin.infrastructure.persistence.data.HcmsContentType;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * 表名称：hcms_content_type自动生成的Repository
  * 表注释：Content Type表
@@ -14,4 +16,7 @@ public interface HcmsContentTypeRepository extends CrudRepository<HcmsContentTyp
 
     @Query("select * from hcms_content_type where content_type_id=:idValue")
     HcmsContentType findOne(String idValue);
+
+    @Query("select * from hcms_content_type where deleted=0")
+    List<HcmsContentType> findAllList();
 }

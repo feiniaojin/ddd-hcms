@@ -7,6 +7,9 @@ import com.feiniaojin.ddd.hcms.domain.content.TypeEntityRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * CQRS 调用mapper完成数据查询
  *
@@ -29,5 +32,14 @@ public class TypeQueryService {
         typeView.setTypeEntityId(typeEntity.getTypeId().getValue());
         typeView.setDisplayName(typeEntity.getDisplayName());
         return typeView;
+    }
+
+    private List<TypeView> translates(List<TypeEntity> typeEntityList) {
+        return typeEntityList.stream().map(this::translate).collect(Collectors.toList());
+    }
+
+    public List<TypeView> findList() {
+        List<TypeEntity> typeEntityList = repository.loadList();
+        return translates(typeEntityList);
     }
 }

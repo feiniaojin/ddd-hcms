@@ -13,7 +13,7 @@ public class TypeFieldController {
     @Resource
     private TypeFieldCommandService commandService;
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseBody
     public void addNewTypeField(@RequestBody TypeFieldCreateCommand command) {
         commandService.createTypeField(command);
