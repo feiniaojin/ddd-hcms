@@ -4,6 +4,8 @@ import com.feiniaojin.application.service.content.type.dto.TypeView;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityRepository;
+import com.feiniaojin.ddd.hcms.domain.vo.PageQuery;
+import com.feiniaojin.ddd.hcms.domain.vo.PageVo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,17 @@ public class TypeQueryService {
     public List<TypeView> findList() {
         List<TypeEntity> typeEntityList = repository.loadList();
         return translates(typeEntityList);
+    }
+
+    public PageVo<TypeView> findByPage(PageQuery pageQuery) {
+        PageVo<TypeEntity> pageVo = repository.findByPage(pageQuery.getPageIndex(),pageQuery.getPageSize());
+
+        PageVo<TypeView> result = new PageVo<>();
+        result.setPageIndex(pageQuery.getPageIndex());
+        result.setPageSize(pageQuery.getPageSize());
+        result.setTotal(pageVo.getTotal());
+        result.setData(translates(pageVo.getData()));
+
+        return result;
     }
 }

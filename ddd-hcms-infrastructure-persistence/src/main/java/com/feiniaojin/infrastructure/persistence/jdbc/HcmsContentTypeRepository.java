@@ -19,4 +19,10 @@ public interface HcmsContentTypeRepository extends CrudRepository<HcmsContentTyp
 
     @Query("select * from hcms_content_type where deleted=0")
     List<HcmsContentType> findAllList();
+
+    @Query(value = "select * from hcms_content_type where deleted=0")
+    List<HcmsContentType> findByPage(Integer offset, Integer limit);
+
+    @Query(value = "select count(id) from hcms_content_type where deleted=0")
+    long findByPageCount();
 }
