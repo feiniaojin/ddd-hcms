@@ -9,6 +9,8 @@ import com.feiniaojin.infrastructure.persistence.jdbc.HcmsContentTypeFieldReposi
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TypeFieldEntityRepositoryImpl implements TypeFieldEntityRepository {
 
@@ -55,5 +57,23 @@ public class TypeFieldEntityRepositoryImpl implements TypeFieldEntityRepository 
         data.setContentTypeId(entity.getTypeId().getValue());
 
         hcmsContentTypeFieldRepository.save(data);
+    }
+
+    @Override
+    public List<TypeFieldEntity> findByTypeId(String typeId) {
+        List<HcmsContentTypeField> dataList = hcmsContentTypeFieldRepository.findByTypeId(typeId);
+        return translate(dataList);
+    }
+
+    private List<TypeFieldEntity> translate(List<HcmsContentTypeField> dataList) {
+        return dataList.stream().map(data -> {
+            TypeFieldEntity entity = new TypeFieldEntity();
+            entity.setStatus(data.getStatus());
+            entity.setFieldName(data.getFieldName());
+            entity.setTypeFieldId(new TypeFieldId(data.getFieldId()));
+            entity.setFieldDataType(data.getFieldDataType());
+            entity.setTypeId(new TypeId(data.getContentTypeId()));
+            return entity;
+        }).toList();
     }
 }

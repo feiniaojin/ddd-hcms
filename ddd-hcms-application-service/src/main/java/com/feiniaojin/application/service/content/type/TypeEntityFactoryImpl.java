@@ -3,7 +3,8 @@ package com.feiniaojin.application.service.content.type;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityFactory;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
-import com.feiniaojin.ddd.hcms.domain.enums.TypeStatusEnum;
+import com.feiniaojin.ddd.hcms.domain.enums.DeletedEnum;
+import com.feiniaojin.ddd.hcms.domain.enums.PublishStatusEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,9 +24,9 @@ public class TypeEntityFactoryImpl implements TypeEntityFactory {
 
         typeEntity.setTypeId(typeEntityId);
         typeEntity.setDisplayName(displayName);
-        typeEntity.setStatus(TypeStatusEnum.DRAFT.getCode());
+        typeEntity.setStatus(PublishStatusEnum.DRAFT.getCode());
 
-        typeEntity.setDeleted(0);
+        typeEntity.setDeleted(DeletedEnum.UN_DELETED.getCode());
         return typeEntity;
     }
 }

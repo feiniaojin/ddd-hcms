@@ -4,6 +4,8 @@ import com.feiniaojin.ddd.hcms.domain.content.TypeId;
 import com.feiniaojin.ddd.hcms.domain.content.TypeFieldEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeFieldEntityFactory;
 import com.feiniaojin.ddd.hcms.domain.content.TypeFieldId;
+import com.feiniaojin.ddd.hcms.domain.enums.DeletedEnum;
+import com.feiniaojin.ddd.hcms.domain.enums.PublishStatusEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -22,8 +24,8 @@ public class TypeFieldEntityFactoryImpl implements TypeFieldEntityFactory {
         String string = UUID.randomUUID().toString();
         TypeFieldId typeFieldEntityId = new TypeFieldId(string);
         typeField.setTypeFieldId(typeFieldEntityId);
-
-        typeField.setDeleted(0);
+        typeField.setStatus(PublishStatusEnum.DRAFT.getCode());
+        typeField.setDeleted(DeletedEnum.UN_DELETED.getCode());
 
         return typeField;
     }

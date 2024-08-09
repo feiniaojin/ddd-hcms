@@ -4,6 +4,8 @@ import com.feiniaojin.infrastructure.persistence.data.HcmsContentTypeField;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * 表名称：hcms_content_type_field自动生成的Repository
  * 表注释：Content Type表
@@ -12,6 +14,9 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface HcmsContentTypeFieldRepository extends CrudRepository<HcmsContentTypeField, Long> {
 
-    @Query("select * from hcms_content_type_field where field_id=:fieldId limit 1")
+    @Query("select * from hcms_content_type_field where field_id=:fieldId and deleted=0 limit 1")
     HcmsContentTypeField findOneByBizId(String fieldId);
+
+    @Query("select * from hcms_content_type_field where content_type_id=:typeId and deleted=0")
+    List<HcmsContentTypeField> findByTypeId(String typeId);
 }

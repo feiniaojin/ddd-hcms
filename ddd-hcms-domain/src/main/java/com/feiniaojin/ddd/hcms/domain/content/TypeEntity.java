@@ -1,7 +1,8 @@
 package com.feiniaojin.ddd.hcms.domain.content;
 
 import com.feiniaojin.ddd.AbstractDomainMask;
-import com.feiniaojin.ddd.hcms.domain.enums.TypeStatusEnum;
+import com.feiniaojin.ddd.hcms.domain.enums.DeletedEnum;
+import com.feiniaojin.ddd.hcms.domain.enums.PublishStatusEnum;
 import lombok.Data;
 
 /**
@@ -19,14 +20,18 @@ public class TypeEntity extends AbstractDomainMask {
     private Integer status;
 
     public void createDraft() {
-        this.status = TypeStatusEnum.DRAFT.getCode();
+        this.status = PublishStatusEnum.DRAFT.getCode();
     }
 
     public void publish() {
-        this.status = TypeStatusEnum.PUBLISH.getCode();
+        this.status = PublishStatusEnum.PUBLISH.getCode();
     }
 
     public void unPublish() {
-        this.status = TypeStatusEnum.UNPUBLISH.getCode();
+        this.status = PublishStatusEnum.UNPUBLISH.getCode();
+    }
+
+    public void delete() {
+        setDeleted(DeletedEnum.HAVE_DELETED.getCode());
     }
 }

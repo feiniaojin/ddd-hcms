@@ -1,6 +1,8 @@
 package com.feiniaojin.application.service.content.type;
 
 import com.feiniaojin.application.service.content.type.dto.TypeView;
+import com.feiniaojin.application.service.content.typefield.TypeFieldQueryService;
+import com.feiniaojin.application.service.content.typefield.dto.TypeFiledView;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityRepository;
@@ -23,9 +25,17 @@ public class TypeQueryService {
     @Resource
     private TypeEntityRepository repository;
 
+    @Resource
+    private TypeFieldQueryService typeFieldQueryService;
+
     public TypeView findOne(String id) {
         TypeEntity typeEntity = repository.load(new TypeId(id));
-        return this.translate(typeEntity);
+        List<TypeFiledView> typeFiledViewList = typeFieldQueryService.findList(typeEntity.getTypeId().getValue());
+
+        TypeView typeView = this.translate(typeEntity);
+        typeView.setTypeFiledList(typeFiledViewList);
+
+        return typeView;
     }
 
     private TypeView translate(TypeEntity typeEntity) {
@@ -36,13 +46,13 @@ public class TypeQueryService {
         return typeView;
     }
 
-    private List<TypeView> translates(List<TypeEntity> typeEntityList) {
+    private List<TypeView> translate(List<TypeEntity> typeEntityList) {
         return typeEntityList.stream().map(this::translate).collect(Collectors.toList());
     }
 
     public List<TypeView> findList() {
         List<TypeEntity> typeEntityList = repository.loadList();
-        return translates(typeEntityList);
+        return translate(typeEntityList);
     }
 
     public PageVo<TypeView> findByPage(PageQuery pageQuery) {
@@ -52,7 +62,7 @@ public class TypeQueryService {
         result.setPageIndex(pageQuery.getPageIndex());
         result.setPageSize(pageQuery.getPageSize());
         result.setTotal(pageVo.getTotal());
-        result.setData(translates(pageVo.getData()));
+        result.setData(translate(pageVo.getData()));
 
         return result;
     }

@@ -3,7 +3,7 @@ package com.feiniaojin.ddd.hcms.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum TypeStatusEnum {
+public enum PublishStatusEnum {
     DRAFT(0, "草稿状态"),
     PUBLISH(1, "发布状态"),
     UNPUBLISH(2, "撤回状态");
@@ -13,7 +13,7 @@ public enum TypeStatusEnum {
     private final String name;
 
 
-    TypeStatusEnum(Integer code, String name) {
+    PublishStatusEnum(Integer code, String name) {
         this.code = code;
         this.name = name;
     }

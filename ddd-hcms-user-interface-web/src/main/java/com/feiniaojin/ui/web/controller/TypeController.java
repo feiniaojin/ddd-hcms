@@ -37,14 +37,14 @@ public class TypeController {
 
     @ResponseBody
     @PostMapping("/release/{typeId}")
-    public void publish(@PathVariable String typeId) {
-        commandService.publish(typeId);
+    public void release(@PathVariable String typeId) {
+        commandService.release(typeId);
     }
 
     @ResponseBody
     @PostMapping("/unRelease/{typeId}")
-    public void unPublish(@PathVariable String typeId) {
-        commandService.unPublish(typeId);
+    public void unRelease(@PathVariable String typeId) {
+        commandService.unRelease(typeId);
     }
 
     @PostMapping("/list")
@@ -64,5 +64,11 @@ public class TypeController {
     @ResponseBody
     public TypeView queryOne(@PathVariable String typeId) {
         return queryService.findOne(typeId);
+    }
+
+    @DeleteMapping("/{typeId}")
+    @ResponseBody
+    public void delete(@PathVariable String typeId) {
+        commandService.delete(typeId);
     }
 }

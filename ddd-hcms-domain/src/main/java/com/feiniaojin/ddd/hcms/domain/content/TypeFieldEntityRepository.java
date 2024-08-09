@@ -2,6 +2,8 @@ package com.feiniaojin.ddd.hcms.domain.content;
 
 import com.feiniaojin.ddd.DomainRepository;
 
+import java.util.List;
+
 /**
  * ContentField 仓储
  *
@@ -9,4 +11,5 @@ import com.feiniaojin.ddd.DomainRepository;
  */
 public interface TypeFieldEntityRepository extends DomainRepository<TypeFieldEntity, TypeFieldId> {
 
+    List<TypeFieldEntity> findByTypeId(String typeId);
 }

@@ -17,10 +17,10 @@ public class EntryFieldQueryService {
 
     public List<EntryFieldView> listByEntryId(String entryId) {
         List<ContentEntryField> list = repository.listByEntryId(entryId);
-        return this.translates(list);
+        return this.translate(list);
     }
 
-    private List<EntryFieldView> translates(List<ContentEntryField> list) {
+    private List<EntryFieldView> translate(List<ContentEntryField> list) {
         return list.stream().map(this::translate).collect(Collectors.toList());
     }
 

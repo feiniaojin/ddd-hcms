@@ -66,7 +66,7 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
     @Override
     public List<TypeEntity> loadList() {
         List<HcmsContentType> hcmsContentTypeList = jdbcRepository.findAllList();
-        return translates(hcmsContentTypeList);
+        return translate(hcmsContentTypeList);
     }
 
     @Override
@@ -76,12 +76,12 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
 
         PageVo<TypeEntity> pageVo = new PageVo<>();
         pageVo.setTotal(total);
-        pageVo.setData(translates(list));
+        pageVo.setData(translate(list));
         return pageVo;
     }
 
 
-    private List<TypeEntity> translates(List<HcmsContentType> hcmsContentTypeList) {
+    private List<TypeEntity> translate(List<HcmsContentType> hcmsContentTypeList) {
         List<TypeEntity> typeEntityList = new ArrayList<>();
         for (HcmsContentType hcmsContentType:hcmsContentTypeList) {
             TypeEntity typeEntity = new TypeEntity();
