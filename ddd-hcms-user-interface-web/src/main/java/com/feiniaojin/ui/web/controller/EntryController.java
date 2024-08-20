@@ -3,8 +3,8 @@ package com.feiniaojin.ui.web.controller;
 import com.feiniaojin.application.service.content.entry.EntryCommandService;
 import com.feiniaojin.application.service.content.entry.EntryQueryService;
 import com.feiniaojin.application.service.content.entry.dto.EntryCreateCommand;
+import com.feiniaojin.application.service.content.entry.dto.EntryQuery;
 import com.feiniaojin.application.service.content.entry.dto.EntryView;
-import com.feiniaojin.ui.web.annotation.EntryQuery;
 import com.feiniaojin.ui.web.annotation.UrlRequestParam;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -26,16 +26,11 @@ public class EntryController {
         commandService.createEntry(command);
     }
 
-    @PostMapping("/page")
-    @ResponseBody
-    public Page<EntryView> pageList() {
-        return queryService.pageList();
-    }
 
     @GetMapping("/{entryId}")
     @ResponseBody
     public EntryView queryOne(@PathVariable String entryId) {
-        com.feiniaojin.application.service.content.entry.dto.EntryQuery entryQuery = new com.feiniaojin.application.service.content.entry.dto.EntryQuery();
+        EntryQuery entryQuery = new com.feiniaojin.application.service.content.entry.dto.EntryQuery();
         entryQuery.setEntryId(entryId);
         return queryService.findOne(entryQuery);
     }
