@@ -54,8 +54,8 @@ public class EntryQueryService {
         EntryQuery.Filter filter2 = new EntryQuery.Filter("count", "100", "$eq");
         query.setFilters(List.of(filter1, filter2));
 
-        EntryQuery.Sort sort1 = new EntryQuery.Sort("userName", "asc");
-        EntryQuery.Sort sort2 = new EntryQuery.Sort("count", "desc");
+        EntryQuery.Sort sort1 = new EntryQuery.Sort("userName", 0,"asc");
+        EntryQuery.Sort sort2 = new EntryQuery.Sort("count", 1,"desc");
         query.setSorts(List.of(sort1, sort2));
 
         EntryQuery.Page page1 = new EntryQuery.Page(2, 10);
