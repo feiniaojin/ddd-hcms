@@ -49,6 +49,7 @@ public class EntryQueryService {
     }
 
     public static void main(String[] args) {
+
         EntryQuery query = new EntryQuery();
         EntryQuery.Filter filter1 = new EntryQuery.Filter("userName", "feiniaojin", "$eq");
         EntryQuery.Filter filter2 = new EntryQuery.Filter("count", "100", "$eq");
@@ -63,24 +64,23 @@ public class EntryQueryService {
 
         List<EntryQuery.Filter> filters = query.getFilters();
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("select t0.entry_id from hcms_content_entry_field as t0 ");
+        sqlBuilder.append("select t0.entry_id from hcms_content_entry as t0 ");
 
         //拼接join语句
-        for (int i = 1; i < filters.size(); i++) {
-            sqlBuilder.append("inner join hcms_content_entry_field as t").append(i)
-                    .append(" on t0.entry_id = t").append(i).append(".entry_id");
+        for (int i = 0; i < filters.size(); i++) {
+            int j = i + 1;
+            sqlBuilder.append("inner join hcms_content_entry_field as t").append(j)
+                    .append(" on t0.entry_id = t").append(j).append(".entry_id");
         }
 
         //拼接where
-        sqlBuilder.append(" where ");
+        sqlBuilder.append(" where t0.deleted=0 ");
         for (int i = 0; i < filters.size(); i++) {
-            sqlBuilder.append("t").append(i).append(".field_name=")
+            int j = i + 1;
+            sqlBuilder.append("and t").append(j).append(".field_name=")
                     .append(filters.get(i).getFieldName())
-                    .append(" and t").append(i).append(".field_value=")
+                    .append(" and t").append(j).append(".field_value=")
                     .append(filters.get(i).getValue());
-            if (i < filters.size() - 1) {
-                sqlBuilder.append(" and ");
-            }
         }
 
         //拼接排序
