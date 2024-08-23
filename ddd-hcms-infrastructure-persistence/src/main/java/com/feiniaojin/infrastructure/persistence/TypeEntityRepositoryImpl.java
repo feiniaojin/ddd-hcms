@@ -4,13 +4,9 @@ import com.feiniaojin.ddd.hcms.domain.content.TypeEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityRepository;
 import com.feiniaojin.ddd.hcms.domain.vo.PageVo;
-import com.feiniaojin.infrastructure.persistence.data.HcmsContentType;
-import com.feiniaojin.infrastructure.persistence.jdbc.HcmsContentTypeRepository;
+import com.feiniaojin.infrastructure.persistence.data.ContentType;
+import com.feiniaojin.infrastructure.persistence.jdbc.ContentTypeRepository;
 import jakarta.annotation.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,14 +17,14 @@ import java.util.List;
 public class TypeEntityRepositoryImpl implements TypeEntityRepository {
 
     @Resource
-    private HcmsContentTypeRepository jdbcRepository;
+    private ContentTypeRepository jdbcRepository;
 
     @Override
     public TypeEntity load(TypeId entityId) {
 
         String idValue = entityId.getValue();
 
-        HcmsContentType hcmsContentType = jdbcRepository.findOne(idValue);
+        ContentType hcmsContentType = jdbcRepository.findOne(idValue);
 
         TypeEntity typeEntity = new TypeEntity();
         typeEntity.setTypeId(entityId);
@@ -46,7 +42,7 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
     @Override
     @Transactional
     public void save(TypeEntity entity) {
-        HcmsContentType data = new HcmsContentType();
+        ContentType data = new ContentType();
 
         data.setId(entity.getId());
         data.setVersion(entity.getVersion());
@@ -58,20 +54,20 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
 
         data.setStatus(entity.getStatus());
         data.setDisplayName(entity.getDisplayName());
-        data.setContentTypeId(entity.getTypeId().getValue());
+        data.setTypeId(entity.getTypeId().getValue());
 
         jdbcRepository.save(data);
     }
 
     @Override
     public List<TypeEntity> loadList() {
-        List<HcmsContentType> hcmsContentTypeList = jdbcRepository.findAllList();
+        List<ContentType> hcmsContentTypeList = jdbcRepository.findAllList();
         return translate(hcmsContentTypeList);
     }
 
     @Override
     public PageVo<TypeEntity> findByPage(Integer pageIndex, Integer pageSize) {
-        List<HcmsContentType> list = jdbcRepository.findByPage(pageIndex - 1, pageSize);
+        List<ContentType> list = jdbcRepository.findByPage(pageIndex - 1, pageSize);
         long total = jdbcRepository.findByPageCount();
 
         PageVo<TypeEntity> pageVo = new PageVo<>();
@@ -81,9 +77,9 @@ public class TypeEntityRepositoryImpl implements TypeEntityRepository {
     }
 
 
-    private List<TypeEntity> translate(List<HcmsContentType> hcmsContentTypeList) {
+    private List<TypeEntity> translate(List<ContentType> hcmsContentTypeList) {
         List<TypeEntity> typeEntityList = new ArrayList<>();
-        for (HcmsContentType hcmsContentType:hcmsContentTypeList) {
+        for (ContentType hcmsContentType:hcmsContentTypeList) {
             TypeEntity typeEntity = new TypeEntity();
             typeEntity.setTypeId(new TypeId(String.valueOf(hcmsContentType.getId())));
             typeEntity.setDisplayName(hcmsContentType.getDisplayName());

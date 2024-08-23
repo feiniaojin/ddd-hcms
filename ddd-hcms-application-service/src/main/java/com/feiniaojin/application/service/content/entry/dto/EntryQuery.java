@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class EntryQuery {
 
+    String typeId;
+
     String entryId;
 
     private List<Filter> filters;

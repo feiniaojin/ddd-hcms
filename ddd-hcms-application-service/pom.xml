@@ -14,6 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>com.feiniaojin</groupId>
+            <artifactId>graceful-response</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.feiniaojin</groupId>
             <artifactId>ddd-hcms-domain</artifactId>
         </dependency>
         <dependency>

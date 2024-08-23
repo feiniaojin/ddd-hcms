@@ -20,7 +20,7 @@ import java.util.Date;
 @Data
 @Table("hcms_content_type")
 @Generated("generator")
-public class HcmsContentType implements Serializable {
+public class ContentType implements Serializable {
     /**
      * 自增主键
      */
@@ -29,7 +29,7 @@ public class HcmsContentType implements Serializable {
     /**
      * 业务唯一标识
      */
-    private String contentTypeId;
+    private String typeId;
     /**
      * 名称
      */

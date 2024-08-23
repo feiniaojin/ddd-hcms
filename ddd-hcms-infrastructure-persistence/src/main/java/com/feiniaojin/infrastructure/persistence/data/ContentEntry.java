@@ -12,15 +12,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 表名称：hcms_content_type_field
- * 表注释：Content Type表
+ * 表名称：hcms_content_entry
+ * 表注释：内容实例表
  * NOTICE:本文件由代码生成器code-generator生成，不要在本文件手工追加任何内容，因为随时可能重新生成替换
  * github：https://github.com/feiniaojin/code-generator
  */
 @Data
-@Table("hcms_content_type_field")
+@Table("hcms_content_entry")
 @Generated("generator")
-public class HcmsContentTypeField implements Serializable {
+public class ContentEntry implements Serializable {
     /**
      * 自增主键
      */
@@ -29,20 +29,11 @@ public class HcmsContentTypeField implements Serializable {
     /**
      * 业务唯一标识
      */
-    private String fieldId;
-
+    private String entryId;
     /**
-     * 内容类型的唯一标识
+     * hcms_content_type表的唯一标识
      */
-    private String contentTypeId;
-    /**
-     * 属性名称
-     */
-    private String fieldName;
-    /**
-     * 属性的数据类型
-     */
-    private Integer fieldDataType;
+    private String typeId;
     /**
      * 状态：0草稿，1已发布，2撤回
      */
@@ -58,7 +49,7 @@ public class HcmsContentTypeField implements Serializable {
     /**
      * 创建时间
      */
-    @CreatedDate
+     @CreatedDate
     private Date createdTime;
     /**
      * 更新人

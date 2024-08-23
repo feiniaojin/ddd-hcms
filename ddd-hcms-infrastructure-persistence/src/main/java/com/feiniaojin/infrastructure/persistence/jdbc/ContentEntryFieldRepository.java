@@ -19,4 +19,7 @@ public interface ContentEntryFieldRepository extends CrudRepository<ContentEntry
 
     @Query("select * from hcms_content_entry_field where entry_id=:entryId")
     List<ContentEntryField> listByEntryId(String entryId);
+
+    @Query("select * from hcms_content_entry_field where entry_id in (:entryIds)")
+    List<ContentEntryField> queryList(List<String> entryIds);
 }

@@ -4,8 +4,8 @@ import com.feiniaojin.ddd.hcms.domain.content.EntryEntity;
 import com.feiniaojin.ddd.hcms.domain.content.EntryId;
 import com.feiniaojin.ddd.hcms.domain.content.EntryEntityRepository;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
-import com.feiniaojin.infrastructure.persistence.data.HcmsContentEntry;
-import com.feiniaojin.infrastructure.persistence.jdbc.HcmsContentEntryRepository;
+import com.feiniaojin.infrastructure.persistence.data.ContentEntry;
+import com.feiniaojin.infrastructure.persistence.jdbc.ContentEntryRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Repository;
 public class EntryEntityRepositoryImpl implements EntryEntityRepository {
 
     @Resource
-    private HcmsContentEntryRepository hcmsContentEntryRepository;
+    private ContentEntryRepository hcmsContentEntryRepository;
 
     @Override
     public EntryEntity load(EntryId entryEntityId) {
 
-        HcmsContentEntry data = hcmsContentEntryRepository.findOneByBizId(entryEntityId.getValue());
+        ContentEntry data = hcmsContentEntryRepository.findOneByBizId(entryEntityId.getValue());
 
         EntryEntity entity = new EntryEntity();
         entity.setEntryId(entryEntityId);
-        entity.setTypeId(new TypeId(data.getContentTypeId()));
+        entity.setTypeId(new TypeId(data.getTypeId()));
 
         entity.setId(data.getId());
         entity.setVersion(data.getVersion());
@@ -34,7 +34,7 @@ public class EntryEntityRepositoryImpl implements EntryEntityRepository {
     @Override
     public void save(EntryEntity entity) {
 
-        HcmsContentEntry data = new HcmsContentEntry();
+        ContentEntry data = new ContentEntry();
 
         data.setId(entity.getId());
         data.setVersion(entity.getVersion());
@@ -44,8 +44,8 @@ public class EntryEntityRepositoryImpl implements EntryEntityRepository {
         data.setModifiedTime(entity.getModifiedTime());
         data.setDeleted(entity.getDeleted());
 
-        data.setContentTypeId(entity.getTypeId().getValue());
-        data.setContentEntryId(entity.getEntryId().getValue());
+        data.setTypeId(entity.getTypeId().getValue());
+        data.setEntryId(entity.getEntryId().getValue());
         data.setStatus(entity.getStatus());
 
         hcmsContentEntryRepository.save(data);

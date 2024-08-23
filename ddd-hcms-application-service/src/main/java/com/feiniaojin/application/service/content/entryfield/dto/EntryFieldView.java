@@ -8,4 +8,6 @@ public class EntryFieldView {
     private String contentEntryId;
     private String fieldId;
     private String entryFieldValue;
+    private String fieldValue;
+    private String fieldName;
 }
