@@ -10,6 +10,7 @@
     <artifactId>ddd-hcms-launcher</artifactId>
 
     <properties>
+        <skywalking.version>9.3.0</skywalking.version>
     </properties>
 
     <dependencies>
@@ -39,6 +40,17 @@
         <dependency>
             <groupId>com.feiniaojin</groupId>
             <artifactId>ddd-hcms-user-interface-worker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-logback-1.x</artifactId>
+            <version>${skywalking.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <version>${skywalking.version}</version>
         </dependency>
     </dependencies>
 

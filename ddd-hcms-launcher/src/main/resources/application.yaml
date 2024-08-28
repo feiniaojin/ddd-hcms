@@ -5,7 +5,7 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://${MYSQL_IP:localhost}:${MYSQL_PORT:3306}/ddd_hcms
+    url: jdbc:mysql://${MYSQL_IP:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:ddd_hcms}
     username: ${MYSQL_USERNAME:feiniaojin}
     password: ${MYSQL_PASSWORD:hcms}
     driver-class-name: com.mysql.cj.jdbc.Driver
