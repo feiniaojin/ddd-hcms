@@ -25,3 +25,13 @@ graceful-response:
   print-exception-in-global-advice: true
   response-style: 1
 
+management:
+  server:
+    port: 9010
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  endpoint:
+    prometheus:
+      enabled: true
