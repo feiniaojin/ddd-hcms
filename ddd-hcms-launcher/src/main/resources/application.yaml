@@ -22,8 +22,10 @@ spring:
     resources:
       static-locations: classpath:/static/,classpath:/views/
 graceful-response:
+  i18n: false
   print-exception-in-global-advice: true
   response-style: 1
+  exclude-return-types: org.springframework.boot.actuate.endpoint.OperationResponseBodyMap
 
 # 开启健康检查
 management:
