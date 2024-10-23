@@ -30,8 +30,8 @@ graceful-response:
 # 开启健康检查
 management:
   # 自定义管理服务地址和端口，默认和应用程序地址端口一致
-#  server:
-#    port: 9010
+  server:
+    port: 9010
   endpoint:
     shutdown:
       enabled: true
