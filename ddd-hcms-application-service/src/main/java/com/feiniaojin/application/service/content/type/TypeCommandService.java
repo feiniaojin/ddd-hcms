@@ -32,7 +32,7 @@ public class TypeCommandService {
 
     public void updateTypeDraft(TypeUpdateCommand updateCommand) {
         TypeEntity typeEntity = repository.load(new TypeId(updateCommand.getTypeId()));
-        if (PublishStatusEnum.PUBLISH.getCode().equals(typeEntity.getStatus())) {
+        if (typeEntity.isPublishStatus()) {
             throw new RuntimeException("Published types cannot be updated！");
         }
         typeEntity.setDisplayName(updateCommand.getDisplayName());

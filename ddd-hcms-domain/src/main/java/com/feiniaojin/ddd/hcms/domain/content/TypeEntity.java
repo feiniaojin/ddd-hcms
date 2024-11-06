@@ -34,4 +34,9 @@ public class TypeEntity extends AbstractDomainMask {
     public void delete() {
         setDeleted(DeletedEnum.HAVE_DELETED.getCode());
     }
+
+    public boolean isPublishStatus() {
+        return PublishStatusEnum.PUBLISH.getCode().equals(this.getStatus());
+    }
+
 }
