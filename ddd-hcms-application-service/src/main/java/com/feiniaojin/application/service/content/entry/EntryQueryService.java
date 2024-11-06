@@ -187,7 +187,7 @@ public class EntryQueryService {
     }
 
     public EntryView findOne(EntryQuery query) {
-        ContentEntry entryData = jdbcEntryRepository.findOneByBizId(query.getEntryId());
+        ContentEntry entryData = jdbcEntryRepository.getByEntryId(query.getEntryId());
         if (Objects.isNull(entryData)) {
             throw new RuntimeException();
         }
