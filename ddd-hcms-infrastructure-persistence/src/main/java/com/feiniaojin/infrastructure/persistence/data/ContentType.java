@@ -49,7 +49,7 @@ public class ContentType implements Serializable {
     /**
      * 创建时间
      */
-     @CreatedDate
+    @CreatedDate
     private Date createdTime;
     /**
      * 更新人
