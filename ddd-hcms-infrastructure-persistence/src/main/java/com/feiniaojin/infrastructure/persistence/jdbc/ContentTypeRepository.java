@@ -25,4 +25,7 @@ public interface ContentTypeRepository extends CrudRepository<ContentType, Long>
 
     @Query(value = "select count(id) from hcms_content_type where deleted=0")
     long findByPageCount();
+
+    @Query(value = "select * from hcms_content_type where display_name=:displayName and deleted=0")
+    ContentType getByDisplayName(String displayName);
 }

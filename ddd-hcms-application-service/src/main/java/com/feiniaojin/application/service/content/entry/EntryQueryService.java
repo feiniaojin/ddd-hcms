@@ -4,6 +4,8 @@ import com.feiniaojin.application.service.content.entry.dto.EntryQuery;
 import com.feiniaojin.application.service.content.entry.dto.EntryView;
 import com.feiniaojin.application.service.content.entryfield.EntryFieldQueryService;
 import com.feiniaojin.application.service.content.entryfield.dto.EntryFieldView;
+import com.feiniaojin.ddd.hcms.domain.enums.ErrorCodeEnum;
+import com.feiniaojin.ddd.hcms.domain.exception.BusinessException;
 import com.feiniaojin.gracefulresponse.data.PageBean;
 import com.feiniaojin.infrastructure.persistence.data.ContentEntry;
 import com.feiniaojin.infrastructure.persistence.data.ContentEntryField;
@@ -189,7 +191,7 @@ public class EntryQueryService {
     public EntryView findOne(EntryQuery query) {
         ContentEntry entryData = jdbcEntryRepository.getByEntryId(query.getEntryId());
         if (Objects.isNull(entryData)) {
-            throw new RuntimeException();
+            throw new BusinessException(ErrorCodeEnum.RETURN_PARAMETER_IS_NULL);
         }
         return this.translate(entryData);
     }
@@ -205,28 +207,28 @@ public class EntryQueryService {
         return entryView;
     }
 
-    public static void main(String[] args) {
-
-        String typeId = "product";
-
-        EntryQuery query = new EntryQuery();
-
-        query.setTypeId(typeId);
-        EntryQuery.Filter filter1 = new EntryQuery.Filter("userName", "feiniaojin", "$eq");
-        EntryQuery.Filter filter2 = new EntryQuery.Filter("count", "100", "$eq");
-        query.setFilters(List.of(filter1, filter2));
-
-        EntryQuery.Sort sort1 = new EntryQuery.Sort("userName", 0, "asc");
-        EntryQuery.Sort sort2 = new EntryQuery.Sort("count", 1, "desc");
-        query.setSorts(List.of(sort1, sort2));
-
-        EntryQuery.Page page1 = new EntryQuery.Page(1, 10);
-        query.setPage(page1);
-
-        ParseResult parseResult = parseQuery(query);
-
-        System.out.println(parseResult);
-    }
+//    public static void main(String[] args) {
+//
+//        String typeId = "product";
+//
+//        EntryQuery query = new EntryQuery();
+//
+//        query.setTypeId(typeId);
+//        EntryQuery.Filter filter1 = new EntryQuery.Filter("userName", "feiniaojin", "$eq");
+//        EntryQuery.Filter filter2 = new EntryQuery.Filter("count", "100", "$eq");
+//        query.setFilters(List.of(filter1, filter2));
+//
+//        EntryQuery.Sort sort1 = new EntryQuery.Sort("userName", 0, "asc");
+//        EntryQuery.Sort sort2 = new EntryQuery.Sort("count", 1, "desc");
+//        query.setSorts(List.of(sort1, sort2));
+//
+//        EntryQuery.Page page1 = new EntryQuery.Page(1, 10);
+//        query.setPage(page1);
+//
+//        ParseResult parseResult = parseQuery(query);
+//
+//        System.out.println(parseResult);
+//    }
 
     /**
      * Query解析结果
