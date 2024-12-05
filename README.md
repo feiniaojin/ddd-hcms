@@ -1,14 +1,14 @@
 # ddd-hcms介绍
 
 基于ddd-archetype应用架构，通过DDD实现的Headless CMS。
-  
-# DDD学习免费电子书
 
-作者将多年领域驱动设计的经验，撰写成《悟道DDD（Thinking in DDD）》这一电子书，力求用最平实、最通俗、最容易理解的方式将DDD分享给各位朋友。
+# DDD新书推荐
 
-项目地址：https://github.com/feiniaojin/Thinking-in-DDD 
+本项目作者的新书《悟道领域驱动设计》目前已上架各大电商平台，感兴趣的朋友可以帮忙支持一下。
 
-在线阅读：https://ddd.feiniaojin.com/
+<img alt="悟道领域驱动设计" src="assets/book.png" style="width: 50%">
+
+购买链接：https://item.jd.com/14835288.html
 
 # 快速开始
 
