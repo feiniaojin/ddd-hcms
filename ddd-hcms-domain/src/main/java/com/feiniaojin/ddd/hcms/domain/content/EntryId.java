@@ -1,6 +1,8 @@
 package com.feiniaojin.ddd.hcms.domain.content;
 
 import com.feiniaojin.ddd.EntityId;
+import com.feiniaojin.ddd.hcms.domain.enums.ErrorCodeEnum;
+import com.feiniaojin.ddd.hcms.domain.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -12,7 +14,7 @@ public class EntryId implements EntityId<String> {
 
     public EntryId(String value) {
         if (StringUtils.isBlank(value)) {
-            throw new IllegalArgumentException("ContentEntryId入参不能为空");
+            throw new BusinessException(ErrorCodeEnum.PARAM_CANNOT_BE_NULL, "ContentEntryId");
         }
         this.value = value;
     }
