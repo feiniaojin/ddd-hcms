@@ -6,7 +6,6 @@ import com.feiniaojin.ddd.hcms.domain.content.TypeEntity;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityFactory;
 import com.feiniaojin.ddd.hcms.domain.content.TypeEntityRepository;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
-import com.feiniaojin.ddd.hcms.domain.enums.PublishStatusEnum;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class TypeCommandService {
 
     public void updateTypeDraft(TypeUpdateCommand updateCommand) {
         TypeEntity typeEntity = repository.load(new TypeId(updateCommand.getTypeId()));
-        if (PublishStatusEnum.PUBLISH.getCode().equals(typeEntity.getStatus())) {
+        if (typeEntity.isPublishStatus()) {
             throw new RuntimeException("Published types cannot be updated！");
         }
         typeEntity.setDisplayName(updateCommand.getDisplayName());
@@ -53,7 +52,7 @@ public class TypeCommandService {
 
     public void delete(String typeId) {
         TypeEntity typeEntity = repository.load(new TypeId(typeId));
-        if (PublishStatusEnum.PUBLISH.getCode().equals(typeEntity.getStatus())) {
+        if (typeEntity.isPublishStatus()) {
             throw new RuntimeException("Published types cannot be deleted！");
         }
         typeEntity.delete();

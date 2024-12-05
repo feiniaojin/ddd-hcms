@@ -1,8 +1,8 @@
 package com.feiniaojin.infrastructure.persistence;
 
 import com.feiniaojin.ddd.hcms.domain.content.EntryEntity;
-import com.feiniaojin.ddd.hcms.domain.content.EntryId;
 import com.feiniaojin.ddd.hcms.domain.content.EntryEntityRepository;
+import com.feiniaojin.ddd.hcms.domain.content.EntryId;
 import com.feiniaojin.ddd.hcms.domain.content.TypeId;
 import com.feiniaojin.infrastructure.persistence.data.ContentEntry;
 import com.feiniaojin.infrastructure.persistence.jdbc.ContentEntryRepository;
@@ -18,7 +18,7 @@ public class EntryEntityRepositoryImpl implements EntryEntityRepository {
     @Override
     public EntryEntity load(EntryId entryEntityId) {
 
-        ContentEntry data = hcmsContentEntryRepository.findOneByBizId(entryEntityId.getValue());
+        ContentEntry data = hcmsContentEntryRepository.getByEntryId(entryEntityId.getValue());
 
         EntryEntity entity = new EntryEntity();
         entity.setEntryId(entryEntityId);

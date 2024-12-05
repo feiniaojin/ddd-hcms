@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.2.5</version>
     </parent>
     <groupId>com.feiniaojin</groupId>
     <artifactId>ddd-hcms</artifactId>
@@ -16,6 +16,8 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <graceful-response.version>5.0.4-boot3</graceful-response.version>
+        <common-lang3.version>3.4</common-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -23,85 +25,71 @@
             <dependency>
                 <groupId>com.feiniaojin</groupId>
                 <artifactId>graceful-response</artifactId>
-                <version>4.0.1-boot3</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>2.15.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.15.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>2.15.2</version>
+                <version>${graceful-response.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.4</version>
+                <version>${common-lang3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-user-interface-worker</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-user-interface-subscriber</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-user-interface-provider</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-infrastructure-cache</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-domain</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-infrastructure-persistence</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-infrastructure-publisher</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-infrastructure-gateway</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-application-service</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-user-interface-web</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.feiniaojin</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ddd-hcms-launcher</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <modules>
         <module>ddd-hcms-domain</module>
         <module>ddd-hcms-application-service</module>
@@ -115,4 +103,5 @@
         <module>ddd-hcms-user-interface-subscriber</module>
         <module>ddd-hcms-launcher</module>
     </modules>
+
 </project>
