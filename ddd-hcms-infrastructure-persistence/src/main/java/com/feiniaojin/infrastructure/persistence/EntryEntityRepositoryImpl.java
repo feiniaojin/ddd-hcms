@@ -39,9 +39,9 @@ public class EntryEntityRepositoryImpl implements EntryEntityRepository {
         data.setId(entity.getId());
         data.setVersion(entity.getVersion());
         data.setCreatedBy(entity.getCreatedBy());
-        data.setCreatedTime(entity.getCreatedTime());
-        data.setModifiedBy(entity.getModifiedBy());
-        data.setModifiedTime(entity.getModifiedTime());
+        data.setCreatedTime(entity.getCreatedDate());
+        data.setModifiedBy(entity.getLastModifiedBy());
+        data.setModifiedTime(entity.getLastModifiedDate());
         data.setDeleted(entity.getDeleted());
 
         data.setTypeId(entity.getTypeId().getValue());
