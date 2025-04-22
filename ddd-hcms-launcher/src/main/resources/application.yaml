@@ -1,5 +1,8 @@
 server:
   port: 9009
+  tomcat:
+    relaxed-path-chars: [ '|', '{', '}', '[', ']']
+    relaxed-query-chars: [ '|', '{', '}', '[', ']']
 spring:
   application:
     name: ddd-hcms
@@ -7,9 +10,9 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://${MYSQL_IP:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:ddd_hcms}
-    username: ${MYSQL_USERNAME:feiniaojin}
-    password: ${MYSQL_PASSWORD:hcms}
+    url: jdbc:mysql://${MYSQL_IP:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:hcms}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
