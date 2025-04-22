@@ -41,7 +41,7 @@ public class BaseQueryService {
     public List<Map<String, Object>> find(String entry, BaseQuery query) throws UnsupportedEncodingException {
         ContentType contentType = contentTypeRepository.getByDisplayName(entry);
         List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
-        SqlTable table = ArticleTable.of("hcms_article");
+        SqlTable table = ArticleTable.of(contentType.getDisplayName());
 //        table.column()
         // V1.1
         List<SqlColumn<Object>> list = contentTypeFields.stream().map(item -> table.column(item.getFieldName())).toList();

@@ -18,7 +18,7 @@ INSERT INTO hcms.hcms_content_type_field (field_id, type_id, field_name, field_d
 VALUES ('11', '1', 'version', 0, 0, 0, NULL, '2025-04-22 18:27:47', NULL, '2025-04-22 18:27:47', 1);
 
 
-INSERT INTO hcms.hcms_article (document_id, title, context, author, deleted, created_by, created_date, last_modified_by,
+INSERT INTO hcms.article (document_id, title, context, author, deleted, created_by, created_date, last_modified_by,
                                last_modified_date, version)
 VALUES ('1', '标题1', '正文1', '作者1', 0, '1', '2025-04-22 17:03:29', '1', '2025-04-22 17:03:29', 1),
        ('2', '标题2', '正文2', '作者2', 0, '1', '2025-04-22 17:04:03', '1', '2025-04-22 17:04:03', 1),

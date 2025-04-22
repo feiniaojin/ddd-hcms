@@ -96,7 +96,7 @@ create table hcms_files
     version            bigint   default 1 null comment '乐观锁'
 ) comment '文件表' collate = utf8mb4_bin;
 
-CREATE TABLE `hcms_article`
+CREATE TABLE `article`
 (
     `id`                 bigint       NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     `document_id`        varchar(64)  NOT NULL COMMENT '业务唯一标识',
