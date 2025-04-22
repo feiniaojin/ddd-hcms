@@ -80,19 +80,36 @@ create index idx_biz
 
 create table hcms_files
 (
-    id               bigint auto_increment comment '自增主键' primary key,
-    document_id      varchar(64)  not null comment '业务唯一标识',
-    name             varchar(64)  not null comment '文件名称',
-    alternative_text varchar(64)  not null comment '备用文本',
-    title            varchar(64)  not null comment '标题',
-    ext              varchar(64)  not null comment '扩展名',
-    folder_path      varchar(64)  not null comment '文件夹路径',
-    url              varchar(128) not null comment '文件路径',
-    deleted          int      default 0 null comment '逻辑删除标记[0-正常；1-已删除]',
-    created_by      varchar(100) null comment '创建人',
-    created_date     datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    last_modified_by      varchar(100) null comment '更新人',
-    last_modified_date    datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
-    version          bigint   default 1 null comment '乐观锁'
+    id                 bigint auto_increment comment '自增主键' primary key,
+    document_id        varchar(64)  not null comment '业务唯一标识',
+    name               varchar(64)  not null comment '文件名称',
+    alternative_text   varchar(64)  not null comment '备用文本',
+    title              varchar(64)  not null comment '标题',
+    ext                varchar(64)  not null comment '扩展名',
+    folder_path        varchar(64)  not null comment '文件夹路径',
+    url                varchar(128) not null comment '文件路径',
+    deleted            int      default 0 null comment '逻辑删除标记[0-正常；1-已删除]',
+    created_by         varchar(100) null comment '创建人',
+    created_date       datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    last_modified_by   varchar(100) null comment '更新人',
+    last_modified_date datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
+    version            bigint   default 1 null comment '乐观锁'
 ) comment '文件表' collate = utf8mb4_bin;
+
+CREATE TABLE `hcms_article`
+(
+    `id`                 bigint       NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `document_id`        varchar(64)  NOT NULL COMMENT '业务唯一标识',
+    `title`              varchar(64)  NOT NULL COMMENT '标题',
+    `context`            text         NOT NULL COMMENT '正文',
+    `author`             varchar(64)  NOT NULL COMMENT '作者',
+    `deleted`            int          NOT NULL DEFAULT '0' COMMENT '逻辑删除标记[0-正常；1-已删除]',
+    `created_by`         varchar(100) NOT NULL COMMENT '创建人',
+    `created_date`       datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `last_modified_by`   varchar(100) NOT NULL COMMENT '更新人',
+    `last_modified_date` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `version`            bigint       NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='文件表';
+
 

@@ -8,6 +8,10 @@ import com.feiniaojin.ui.web.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *@Author anzhenjiang
@@ -26,11 +30,11 @@ public class BaseController {
 
     @RequestParam
     @GetMapping("/{entry}/find")
-    public void find(@PathVariable String entry, BaseQuery query){
-        baseQueryService.find(entry, query);
+    public List<Map<String, Object>> find(@PathVariable String entry, BaseQuery query) throws UnsupportedEncodingException {
+        return baseQueryService.find(entry, query);
     };
 
-    @GetMapping("/findOne")
+    @GetMapping("/{entry}/findOne/{id}")
     public void findOne(BaseQuery query){};
 
     @PostMapping("create")

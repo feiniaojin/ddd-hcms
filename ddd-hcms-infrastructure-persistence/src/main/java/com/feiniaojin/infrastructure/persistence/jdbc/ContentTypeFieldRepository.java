@@ -17,6 +17,6 @@ public interface ContentTypeFieldRepository extends CrudRepository<ContentTypeFi
     @Query("select * from hcms_content_type_field where field_id=:fieldId and deleted=0 limit 1")
     ContentTypeField findOneByBizId(String fieldId);
 
-    @Query("select * from hcms_content_type_field where content_type_id=:typeId and deleted=0")
+    @Query("select * from hcms_content_type_field where type_id=:typeId and deleted=0")
     List<ContentTypeField> findByTypeId(String typeId);
 }
