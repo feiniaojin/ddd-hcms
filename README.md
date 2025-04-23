@@ -18,4 +18,13 @@ ddd类库
 https://github.com/feiniaojin/ddd
 ```
 
+## 团队成员
+
+### [成员1]
+- **职位/角色**：
+- **简介**：
+- **GitHub**：[littileAn](https://github.com/littileAn)
+- **邮箱**：[anzhenjiang555@163.com]
+
+
 
