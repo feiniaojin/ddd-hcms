@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class BaseController {
         return baseQueryService.findOne(entry, id);
     };
 
-    @PutMapping("/{entry}/create")
+    @PostMapping("/{entry}/create")
     public void create(){};
 
     @DeleteMapping("/{entry}/delete/{id}")
@@ -46,6 +47,8 @@ public class BaseController {
         return baseCommandService.delete(entry, id);
     };
 
-    @PostMapping("/{entry}/update/{id}")
-    public void update(){};
+    @PutMapping("/{entry}/update/{id}")
+    public int update(@PathVariable String entry, @PathVariable String id, @RequestBody HashMap<String, Object> paramsMap){
+        return baseCommandService.update(entry, id, paramsMap);
+    };
 }

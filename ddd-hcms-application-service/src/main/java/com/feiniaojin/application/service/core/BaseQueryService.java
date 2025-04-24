@@ -5,8 +5,8 @@ import com.feiniaojin.infrastructure.persistence.data.ContentType;
 import com.feiniaojin.infrastructure.persistence.data.ContentTypeField;
 import com.feiniaojin.infrastructure.persistence.jdbc.ContentTypeFieldRepository;
 import com.feiniaojin.infrastructure.persistence.jdbc.ContentTypeRepository;
-import com.feiniaojin.infrastructure.persistence.mapper.ArticleTable;
 import com.feiniaojin.infrastructure.persistence.mapper.BaseMapper;
+import com.feiniaojin.infrastructure.persistence.mapper.BaseTable;
 import org.mybatis.dynamic.sql.SqlBuilder;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
@@ -41,7 +41,7 @@ public class BaseQueryService {
     public List<Map<String, Object>> find(String entry, BaseQuery query) throws UnsupportedEncodingException {
         ContentType contentType = contentTypeRepository.getByDisplayName(entry);
         List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
-        SqlTable table = ArticleTable.of(contentType.getDisplayName());
+        SqlTable table = BaseTable.of(contentType.getDisplayName());
 //        table.column()
         // V1.1
         List<SqlColumn<Object>> list = contentTypeFields.stream().map(item -> table.column(item.getFieldName())).toList();
@@ -112,7 +112,7 @@ public class BaseQueryService {
     public Map<String, Object> findOne(String entry, String id) {
         ContentType contentType = contentTypeRepository.getByDisplayName(entry);
         List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
-        SqlTable table = ArticleTable.of(contentType.getDisplayName());
+        SqlTable table = BaseTable.of(contentType.getDisplayName());
         List<SqlColumn<Object>> list = contentTypeFields.stream().map(item -> table.column(item.getFieldName())).toList();
         SelectStatementProvider render = SqlBuilder.select(list).from(table).where(table.column("deleted"), SqlBuilder.isEqualTo(0))
                 .and(table.column("document_id"), SqlBuilder.isEqualTo(id))
