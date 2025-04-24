@@ -29,26 +29,28 @@ public class BaseController {
 
 
     @RequestParam
-    @GetMapping("/{entry}/find")
-    public List<Map<String, Object>> find(@PathVariable String entry, BaseQuery query) throws UnsupportedEncodingException {
-        return baseQueryService.find(entry, query);
-    };
+    @GetMapping("/{resources}/find")
+    public List<Map<String, Object>> find(@PathVariable String resources, BaseQuery query) throws UnsupportedEncodingException {
+        return baseQueryService.find(resources, query);
+    }
 
-    @GetMapping("/{entry}/findOne/{id}")
-    public Map<String, Object> findOne(@PathVariable String entry, @PathVariable String id){
-        return baseQueryService.findOne(entry, id);
-    };
+    @GetMapping("/{resources}/findOne/{id}")
+    public Map<String, Object> findOne(@PathVariable String resources, @PathVariable String id){
+        return baseQueryService.findOne(resources, id);
+    }
 
-    @PostMapping("/{entry}/create")
-    public void create(){};
+    @PostMapping("/{resources}/create")
+    public void create(@PathVariable String resources, @RequestBody HashMap<String, Object> paramsMap){
+        baseCommandService.create(resources, paramsMap);
+    }
 
-    @DeleteMapping("/{entry}/delete/{id}")
-    public int delete(@PathVariable String entry, @PathVariable String id){
-        return baseCommandService.delete(entry, id);
-    };
+    @DeleteMapping("/{resources}/delete/{id}")
+    public int delete(@PathVariable String resources, @PathVariable String id){
+        return baseCommandService.delete(resources, id);
+    }
 
-    @PutMapping("/{entry}/update/{id}")
-    public int update(@PathVariable String entry, @PathVariable String id, @RequestBody HashMap<String, Object> paramsMap){
-        return baseCommandService.update(entry, id, paramsMap);
-    };
+    @PutMapping("/{resources}/update/{id}")
+    public int update(@PathVariable String resources, @PathVariable String id, @RequestBody HashMap<String, Object> paramsMap){
+        return baseCommandService.update(resources, id, paramsMap);
+    }
 }

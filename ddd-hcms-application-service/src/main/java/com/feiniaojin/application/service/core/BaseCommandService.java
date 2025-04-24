@@ -8,6 +8,8 @@ import com.feiniaojin.infrastructure.persistence.mapper.BaseMapper;
 import com.feiniaojin.infrastructure.persistence.mapper.BaseTable;
 import org.mybatis.dynamic.sql.SqlBuilder;
 import org.mybatis.dynamic.sql.SqlTable;
+import org.mybatis.dynamic.sql.insert.GeneralInsertDSL;
+import org.mybatis.dynamic.sql.insert.render.GeneralInsertStatementProvider;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.update.UpdateDSL;
 import org.mybatis.dynamic.sql.update.UpdateModel;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  *@Author anzhenjiang
@@ -35,8 +38,8 @@ public class BaseCommandService {
     @Autowired
     private BaseMapper baseMapper;
 
-    public int delete(String entry, String id) {
-        ContentType contentType = contentTypeRepository.getByDisplayName(entry);
+    public int delete(String resources, String id) {
+        ContentType contentType = contentTypeRepository.getByDisplayName(resources);
         SqlTable table = BaseTable.of(contentType.getDisplayName());
         UpdateStatementProvider render = SqlBuilder.update(table).set(table.column("deleted")).equalTo(1).where(table.column("document_id"), SqlBuilder.isEqualTo(id))
                 .build().render(RenderingStrategies.MYBATIS3);
@@ -61,5 +64,23 @@ public class BaseCommandService {
         UpdateStatementProvider render = update.where(table.column("document_id"), SqlBuilder.isEqualTo(id)).build().render(RenderingStrategies.MYBATIS3);
 
         return baseMapper.update(render);
+    }
+
+    public void create(String resources, HashMap<String, Object> paramsMap) {
+        ContentType contentType = contentTypeRepository.getByDisplayName(resources);
+        List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
+        SqlTable table = BaseTable.of(contentType.getDisplayName());
+        List<String> fieldList = contentTypeFields.stream().map(ContentTypeField::getFieldName).toList();
+        GeneralInsertDSL documentId = SqlBuilder.insertInto(table).set(table.column("document_id")).toValue(UUID.randomUUID().toString())
+                .set(table.column("created_by")).toValue("测试数据")
+                .set(table.column("last_modified_by")).toValue("测试数据");
+        for(Map.Entry<String, Object> entry : paramsMap.entrySet()){
+            if(!fieldList.contains(entry.getKey())){
+                continue;
+            }
+            documentId = documentId.set(table.column(entry.getKey())).toValue(entry.getValue());
+        }
+        GeneralInsertStatementProvider render = documentId.build().render(RenderingStrategies.MYBATIS3);
+        baseMapper.generalInsert(render);
     }
 }

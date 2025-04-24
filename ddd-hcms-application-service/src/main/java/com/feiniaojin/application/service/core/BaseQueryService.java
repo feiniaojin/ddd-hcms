@@ -38,8 +38,8 @@ public class BaseQueryService {
     @Autowired
     private BaseMapper baseMapper;
 
-    public List<Map<String, Object>> find(String entry, BaseQuery query) throws UnsupportedEncodingException {
-        ContentType contentType = contentTypeRepository.getByDisplayName(entry);
+    public List<Map<String, Object>> find(String resources, BaseQuery query) throws UnsupportedEncodingException {
+        ContentType contentType = contentTypeRepository.getByDisplayName(resources);
         List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
         SqlTable table = BaseTable.of(contentType.getDisplayName());
 //        table.column()
@@ -109,8 +109,8 @@ public class BaseQueryService {
 //        System.out.println(sql);
     }
 
-    public Map<String, Object> findOne(String entry, String id) {
-        ContentType contentType = contentTypeRepository.getByDisplayName(entry);
+    public Map<String, Object> findOne(String resources, String id) {
+        ContentType contentType = contentTypeRepository.getByDisplayName(resources);
         List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
         SqlTable table = BaseTable.of(contentType.getDisplayName());
         List<SqlColumn<Object>> list = contentTypeFields.stream().map(item -> table.column(item.getFieldName())).toList();
