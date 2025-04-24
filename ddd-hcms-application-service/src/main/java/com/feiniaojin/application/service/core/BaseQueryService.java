@@ -108,4 +108,16 @@ public class BaseQueryService {
 //        // 移除where条件中开头的and
 //        System.out.println(sql);
     }
+
+    public Map<String, Object> findOne(String entry, String id) {
+        ContentType contentType = contentTypeRepository.getByDisplayName(entry);
+        List<ContentTypeField> contentTypeFields = contentTypeFieldRepository.findByTypeId(contentType.getTypeId());
+        SqlTable table = ArticleTable.of(contentType.getDisplayName());
+        List<SqlColumn<Object>> list = contentTypeFields.stream().map(item -> table.column(item.getFieldName())).toList();
+        SelectStatementProvider render = SqlBuilder.select(list).from(table).where(table.column("deleted"), SqlBuilder.isEqualTo(0))
+                .and(table.column("document_id"), SqlBuilder.isEqualTo(id))
+                .build().render(RenderingStrategies.MYBATIS3);
+
+        return baseMapper.selectOneMappedRow(render);
+    }
 }

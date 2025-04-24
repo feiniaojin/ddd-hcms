@@ -12,6 +12,6 @@ import java.util.List;
  */
 
 @Mapper
-public interface BaseMapper extends CommonSelectMapper {
+public interface BaseMapper extends CommonSelectMapper, CommonUpdateMapper {
 
 }

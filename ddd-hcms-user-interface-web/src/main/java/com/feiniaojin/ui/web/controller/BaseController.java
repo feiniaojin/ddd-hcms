@@ -2,7 +2,6 @@ package com.feiniaojin.ui.web.controller;
 
 import com.feiniaojin.application.service.core.BaseCommandService;
 import com.feiniaojin.application.service.core.BaseQueryService;
-import com.feiniaojin.application.service.core.dto.BaseCommand;
 import com.feiniaojin.application.service.core.dto.BaseQuery;
 import com.feiniaojin.ui.web.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +34,18 @@ public class BaseController {
     };
 
     @GetMapping("/{entry}/findOne/{id}")
-    public void findOne(BaseQuery query){};
+    public Map<String, Object> findOne(@PathVariable String entry, @PathVariable String id){
+        return baseQueryService.findOne(entry, id);
+    };
 
-    @PostMapping("create")
-    public void create(@RequestBody BaseCommand command){};
+    @PutMapping("/{entry}/create")
+    public void create(){};
 
-    @PostMapping("delete")
-    public void delete(@RequestBody BaseCommand command){};
+    @DeleteMapping("/{entry}/delete/{id}")
+    public int delete(@PathVariable String entry, @PathVariable String id){
+        return baseCommandService.delete(entry, id);
+    };
 
-    @PostMapping("update")
-    public void update(@RequestBody BaseCommand command){};
+    @PostMapping("/{entry}/update/{id}")
+    public void update(){};
 }
